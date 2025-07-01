@@ -10,7 +10,7 @@ func TestHandleConnection(t *testing.T) {
 	server := NewEchoServer()
 
 	// Create a listener
-	listener, err := net.Listen("tcp", "127.0.0.1:0")
+	listener, err := net.Listen("tcp", "0.0.0.0:10000")
 	if err != nil {
 		t.Fatalf("Failed to create listener: %v", err)
 	}

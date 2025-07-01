@@ -16,8 +16,8 @@ type Server struct {
 // New creates a new echo server
 func NewEchoServer() *Server {
 	return &Server{
-		host: "127.0.0.1",
-		port: 7,
+		host: "0.0.0.0",
+		port: 10000,
 	}
 }
 
