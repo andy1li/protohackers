@@ -47,9 +47,25 @@ func (s *Server) handleConnection(conn net.Conn) {
 	remoteAddr := conn.RemoteAddr().String()
 	fmt.Printf("🤝 New connection from %s\n", remoteAddr)
 
-	_, err := io.Copy(conn, conn)
-	if err != nil {
-		fmt.Printf("❌ Error handling connection from %s: %v\n", remoteAddr, err)
+	buffer := make([]byte, 1024)
+	for {
+		n, err := conn.Read(buffer)
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			fmt.Printf("❌ Error handling connection from %s: %v\n", remoteAddr, err)
+			continue
+		}
+
+		// Log the data
+		fmt.Printf("From [%s] Received:\n%q\n", remoteAddr, buffer[:n])
+
+		// Echo back
+		_, err = conn.Write(buffer[:n])
+		if err != nil {
+			fmt.Printf("❌ Error writing response to %s: %v\n", remoteAddr, err)
+		}
 	}
 
 	fmt.Printf("👋 Connection from %s closed\n", remoteAddr)
