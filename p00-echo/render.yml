@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: go
+    runtime: go
+    plan: free
+    buildCommand: go build -o dist/echo ./main.go
+    startCommand: ./dist/echo
+    envVars:
+      - key: PORT
+        value: 7
