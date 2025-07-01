@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/andy1li/protohackers/p00-echo/echo"
+	echo "github.com/andy1li/protohackers/p00-echo"
 )
 
 func main() {
@@ -18,7 +18,6 @@ func main() {
 		}
 	}()
 
-	// Wait for interrupt signal
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
 

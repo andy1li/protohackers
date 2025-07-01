@@ -16,8 +16,8 @@ type Server struct {
 // New creates a new echo server
 func NewEchoServer() *Server {
 	return &Server{
-		host: "0.0.0.0",
-		port: 10000,
+		host: "127.0.0.1",
+		port: 7,
 	}
 }
 
@@ -58,10 +58,8 @@ func (s *Server) handleConnection(conn net.Conn) {
 			continue
 		}
 
-		// Log the data
-		fmt.Printf("From [%s] Received:\n%q\n", remoteAddr, buffer[:n])
+		fmt.Printf("📦 Received from %s:\n%q\n", remoteAddr, buffer[:n])
 
-		// Echo back
 		_, err = conn.Write(buffer[:n])
 		if err != nil {
 			fmt.Printf("❌ Error writing response to %s: %v\n", remoteAddr, err)

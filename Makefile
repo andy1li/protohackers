@@ -1,5 +1,5 @@
 test_echo:
-	go test ./p00-echo/echo -v
+	go test ./p00-echo -v
 
-run_echo:
-	go run ./p00-echo/main.go
+run:
+	go run main.go
