@@ -9,7 +9,7 @@ import (
 )
 
 func NewEchoServer() *internal.Server {
-	return internal.NewServer(handleEcho, "0.0.0.0", 8000)
+	return internal.NewServer(handleEcho, "Echo", "0.0.0.0", 8000)
 }
 
 func handleEcho(conn net.Conn) {

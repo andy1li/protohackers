@@ -7,13 +7,15 @@ import (
 
 type Server struct {
 	Handler func(conn net.Conn)
+	name    string
 	host    string
 	port    int
 }
 
-func NewServer(handler func(conn net.Conn), host string, port int) *Server {
+func NewServer(handler func(conn net.Conn), name string, host string, port int) *Server {
 	return &Server{
 		Handler: handler,
+		name:    name,
 		host:    host,
 		port:    port,
 	}
@@ -30,7 +32,7 @@ func (s *Server) Start() error {
 	}
 	defer listener.Close()
 
-	fmt.Printf("👂 Server listening on %s\n", s.GetAddress())
+	fmt.Printf("👂 %s server listening on %s\n", s.name, s.GetAddress())
 
 	for {
 		conn, err := listener.Accept()

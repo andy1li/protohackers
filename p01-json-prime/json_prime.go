@@ -10,7 +10,7 @@ import (
 )
 
 func NewJSONPrimeServer() *internal.Server {
-	return internal.NewServer(handleJSONPrime, "0.0.0.0", 8001)
+	return internal.NewServer(handleJSONPrime, "JSON Prime", "0.0.0.0", 8001)
 }
 
 func handleJSONPrime(conn net.Conn) {
@@ -40,6 +40,7 @@ func handleJSONPrime(conn net.Conn) {
 		}
 
 		prime := isPrime(request.Number)
+		fmt.Printf("🔢 %d is prime: %t\n", request.Number, prime)
 
 		response, err := json.Marshal(IsPrimeResponse{
 			Method: "isPrime",
