@@ -10,7 +10,7 @@ func TestJSONPrimeServer(t *testing.T) {
 	conn, cleanup := setupJSONPrimeTest(t)
 	defer cleanup()
 
-	testRequest := "{\"method\":\"isPrime\",\"number\":123}"
+	testRequest := `{"method":"isPrime","number":123}`
 	_, err := conn.Write([]byte(testRequest))
 	if err != nil {
 		t.Fatalf("Failed to write: %v", err)
@@ -23,7 +23,7 @@ func TestJSONPrimeServer(t *testing.T) {
 		t.Fatalf("Failed to read: %v", err)
 	}
 
-	expectedResponse := "{\"method\":\"isPrime\",\"prime\":false}"
+	expectedResponse := `{"method":"isPrime","prime":false}`
 	if string(response) != expectedResponse {
 		t.Errorf(`
 🎯 Expected: '%s'

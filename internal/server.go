@@ -30,7 +30,7 @@ func (s *Server) Start() error {
 	}
 	defer listener.Close()
 
-	fmt.Printf("👂 Echo server listening on %s\n", s.GetAddress())
+	fmt.Printf("👂 Server listening on %s\n", s.GetAddress())
 
 	for {
 		conn, err := listener.Accept()
