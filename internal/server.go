@@ -38,6 +38,7 @@ func (s *Server) Start() error {
 			return fmt.Errorf("❌ Failed to accept connection: %w", err)
 		}
 
+		fmt.Printf("🤝 New connection from %s\n", conn.RemoteAddr().String())
 		go s.Handler(conn)
 	}
 }

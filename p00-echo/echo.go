@@ -9,15 +9,12 @@ import (
 )
 
 func NewEchoServer() *internal.Server {
-	return internal.NewServer(handleEcho, "0.0.0.0", 7)
+	return internal.NewServer(handleEcho, "0.0.0.0", 8000)
 }
 
 func handleEcho(conn net.Conn) {
 	defer conn.Close()
-
-	remoteAddr := conn.RemoteAddr().String()
-	fmt.Printf("🤝 New connection from %s\n", remoteAddr)
+	defer fmt.Printf("👋 Connection from %s closed\n", conn.RemoteAddr().String())
 
 	io.Copy(conn, conn)
-	fmt.Printf("👋 Connection from %s closed\n", remoteAddr)
 }

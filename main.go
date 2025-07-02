@@ -8,13 +8,21 @@ import (
 	"syscall"
 
 	echo "github.com/andy1li/protohackers/p00-echo"
+	json_prime "github.com/andy1li/protohackers/p01-json-prime"
 )
 
 func main() {
 	echoServer := echo.NewEchoServer()
 	go func() {
 		if err := echoServer.Start(); err != nil {
-			log.Fatalf("❌ Server error: %v", err)
+			log.Fatalf("❌ Echo Server error: %v", err)
+		}
+	}()
+
+	jsonPrimeServer := json_prime.NewJSONPrimeServer()
+	go func() {
+		if err := jsonPrimeServer.Start(); err != nil {
+			log.Fatalf("❌ JSON Prime Server error: %v", err)
 		}
 	}()
 

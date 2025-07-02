@@ -1,4 +1,4 @@
-package echo
+package json_prime
 
 import (
 	"io"
@@ -6,12 +6,12 @@ import (
 	"testing"
 )
 
-func TestEchoServer(t *testing.T) {
-	conn, cleanup := setupEchoTest(t)
+func TestJSONPrimeServer(t *testing.T) {
+	conn, cleanup := setupJSONPrimeTest(t)
 	defer cleanup()
 
-	testData := "test data"
-	_, err := conn.Write([]byte(testData))
+	testRequest := "{\"method\":\"isPrime\",\"number\":123}"
+	_, err := conn.Write([]byte(testRequest))
 	if err != nil {
 		t.Fatalf("Failed to write: %v", err)
 	}
@@ -23,15 +23,16 @@ func TestEchoServer(t *testing.T) {
 		t.Fatalf("Failed to read: %v", err)
 	}
 
-	if string(response) != testData {
+	expectedResponse := "{\"method\":\"isPrime\",\"prime\":false}"
+	if string(response) != expectedResponse {
 		t.Errorf(`
 🎯 Expected: '%s'
-📦 Received: '%s'`, testData, string(response))
+📦 Received: '%s'`, expectedResponse, string(response))
 	}
 }
 
-func setupEchoTest(t *testing.T) (net.Conn, func()) {
-	server := NewEchoServer()
+func setupJSONPrimeTest(t *testing.T) (net.Conn, func()) {
+	server := NewJSONPrimeServer()
 
 	listener, err := net.Listen("tcp", "0.0.0.0:0")
 	if err != nil {
