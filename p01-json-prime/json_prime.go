@@ -49,7 +49,7 @@ func handleJSONPrime(conn net.Conn) {
 		if err != nil {
 			break
 		}
-		_, err = conn.Write([]byte(response))
+		_, err = conn.Write(append(response, '\n'))
 		if err != nil {
 			break
 		}
