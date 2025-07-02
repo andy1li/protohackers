@@ -33,6 +33,8 @@ func handleJSONPrime(conn net.Conn) {
 			break
 		}
 
+		fmt.Printf("🔢 Parsed as %+v\n", request)
+
 		if request.Method != "isPrime" {
 			break
 		}
